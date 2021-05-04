@@ -1,0 +1,19 @@
+{
+  "name": "what-the-supabase",
+  "version": "0.0.1",
+  "description": "",
+  "main": "reveal.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Fabian Morón Zirfas <fabianmoronzirfas@protonmail.ch> (https://fabianmoronzirfas.me)",
+  "license": "MIT",
+  "devDependencies": {
+    "chokidar-cli": "2.1.0",
+    "execa": "5.0.0",
+    "livereload": "0.9.3",
+    "reload": "3.1.1",
+    "supabase": "0.3.8"
+  }
+}
