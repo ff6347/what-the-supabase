@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         name: checkout
-      - uses: docker://pandoc/core:2.9
+      - uses: docker://pandoc/core:2.13
         with:
           args: >- # allows you to break string into multiple lines
             -t revealjs
