@@ -8,8 +8,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="https://unpkg.com/reveal.js/css/reset.css">
-  <link rel="stylesheet" href="https://unpkg.com/reveal.js/css/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,7 @@
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
     div.sourceCode { margin: 1em 0; }
     pre.sourceCode { margin: 0; }
@@ -78,19 +79,17 @@
     code span.va { } /* Variable */
     code span.vs { color: #cc9393; } /* VerbatimString */
     code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
-  <link rel="stylesheet" href="https://unpkg.com/reveal.js/css/theme/night.css" id="theme">
-  <!-- Printing and PDF exports -->
-  <script>
-    var link = document.createElement( 'link' );
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = window.location.search.match( /print-pdf/gi ) ? 'https://unpkg.com/reveal.js/css/print/pdf.css' : 'https://unpkg.com/reveal.js/css/print/paper.css';
-    document.getElementsByTagName( 'head' )[0].appendChild( link );
-  </script>
-  <!--[if lt IE 9]>
-  <script src="https://unpkg.com/reveal.js/lib/js/html5shiv.js"></script>
-  <![endif]-->
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/night.css" id="theme">
+<!--my additions to the template -->
+<style>
+
+        pre{
+                box-shadow: none !important;
+        }
+</style>
+<!-- end -->
 </head>
 <body>
   <div class="reveal">
@@ -126,14 +125,14 @@
 </section>
 <section id="jwts-in-supabase" class="slide level2">
 <h2>JWTs in Supabase</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="va">SUPABASE_ANON_KEY=</span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTYwMzk2ODgzNCwiZXhwIjoyNTUwNjUzNjM0LCJyb2xlIjoiYW5vbiJ9.36fUebxgx1mcBo4s19v0SzqmzunP--hm_hep0uLX0ew</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="va">SUPABASE_SERVICE_ROLE_KEY=</span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTYwMzk2ODgzNCwiZXhwIjoyNTUwNjUzNjM0LCJyb2xlIjoic2VydmljZV9yb2xlIn0.necIJaiP7X2T2QjGeV-FhpkizcNTX8HjDDBAxpgQTEI</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="va">JWT_SECRET=</span>super-secret-jwt-token-with-at-least-32-characters-long</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">SUPABASE_ANON_KEY</span><span class="op">=</span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTYwMzk2ODgzNCwiZXhwIjoyNTUwNjUzNjM0LCJyb2xlIjoiYW5vbiJ9.36fUebxgx1mcBo4s19v0SzqmzunP--hm_hep0uLX0ew</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">SUPABASE_SERVICE_ROLE_KEY</span><span class="op">=</span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTYwMzk2ODgzNCwiZXhwIjoyNTUwNjUzNjM0LCJyb2xlIjoic2VydmljZV9yb2xlIn0.necIJaiP7X2T2QjGeV-FhpkizcNTX8HjDDBAxpgQTEI</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">JWT_SECRET</span><span class="op">=</span>super-secret-jwt-token-with-at-least-32-characters-long</span></code></pre></div>
 <p>Checkout <a href="https://jwt.io">jwt.io</a></p>
 </section>
 <section id="what-is-row-level-security" class="slide level2">
 <h2>What is Row Level Security</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> table_name <span class="kw">ENABLE</span> <span class="kw">ROW</span> <span class="kw">LEVEL</span> SECURITY;</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> table_name <span class="kw">ENABLE</span> <span class="kw">ROW</span> <span class="kw">LEVEL</span> SECURITY;</span></code></pre></div>
 </section>
 <section id="row-level-security-is" class="slide level2">
 <h2>Row Level Security is…</h2>
@@ -146,11 +145,11 @@
 </section>
 <section id="what-are-postgres-policies" class="slide level2">
 <h2>What are Postgres Policies?</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">CREATE</span> POLICY name <span class="kw">ON</span> table_name</span>
-<span id="cb3-2"><a href="#cb3-2"></a>    [ <span class="cf">FOR</span> { <span class="kw">ALL</span> | <span class="kw">SELECT</span> | <span class="kw">INSERT</span> | <span class="kw">UPDATE</span> | <span class="kw">DELETE</span> } ]</span>
-<span id="cb3-3"><a href="#cb3-3"></a>    [ <span class="kw">TO</span> { role_name | <span class="kw">PUBLIC</span> | CURRENT_USER | SESSION_USER } [, <span class="op">..</span>.] ]</span>
-<span id="cb3-4"><a href="#cb3-4"></a>    [ <span class="kw">USING</span> ( using_expression ) ]</span>
-<span id="cb3-5"><a href="#cb3-5"></a>    [ <span class="kw">WITH</span> <span class="kw">CHECK</span> ( check_expression ) ]</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> POLICY name <span class="kw">ON</span> table_name</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    [ <span class="cf">FOR</span> { <span class="kw">ALL</span> | <span class="kw">SELECT</span> | <span class="kw">INSERT</span> | <span class="kw">UPDATE</span> | <span class="kw">DELETE</span> } ]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    [ <span class="kw">TO</span> { role_name | <span class="kw">PUBLIC</span> | CURRENT_USER | SESSION_USER } [, <span class="op">..</span>.] ]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    [ <span class="kw">USING</span> ( using_expression ) ]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    [ <span class="kw">WITH</span> <span class="kw">CHECK</span> ( check_expression ) ]</span></code></pre></div>
 </section>
 <section id="postgres-policies-are" class="slide level2">
 <h2>Postgres Policies are…</h2>
@@ -169,27 +168,27 @@
 </section>
 <section id="triggers-are" class="slide level2">
 <h2>Triggers are…</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">-- trigger</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">create</span> <span class="kw">function</span> <span class="kw">public</span>.handle_new_user() returns <span class="kw">trigger</span> <span class="kw">as</span> $$ <span class="cf">begin</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">insert</span> <span class="kw">into</span> <span class="kw">public</span>.userprofiles (<span class="kw">id</span>)</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">values</span> (<span class="kw">new</span>.<span class="kw">id</span>);</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">return</span> <span class="kw">new</span>;</span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="cf">end</span>;</span>
-<span id="cb4-7"><a href="#cb4-7"></a>$$ language plpgsql security <span class="kw">definer</span>;</span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">-- trigger the function every time a user is created</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">create</span> <span class="kw">trigger</span> on_auth_user_created</span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="kw">after</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="kw">insert</span> <span class="kw">on</span> auth.users <span class="cf">for</span> <span class="kw">each</span> <span class="kw">row</span> <span class="kw">execute</span> <span class="kw">procedure</span> <span class="kw">public</span>.handle_new_user();</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- trigger</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">create</span> <span class="kw">function</span> <span class="kw">public</span>.handle_new_user() returns <span class="kw">trigger</span> <span class="kw">as</span> $$ <span class="cf">begin</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">insert</span> <span class="kw">into</span> <span class="kw">public</span>.userprofiles (<span class="kw">id</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">values</span> (<span class="kw">new</span>.<span class="kw">id</span>);</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">return</span> <span class="kw">new</span>;</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span>;</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>$$ language plpgsql security <span class="kw">definer</span>;</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- trigger the function every time a user is created</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">create</span> <span class="kw">trigger</span> on_auth_user_created</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">after</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">insert</span> <span class="kw">on</span> auth.users <span class="cf">for</span> <span class="kw">each</span> <span class="kw">row</span> <span class="kw">execute</span> <span class="kw">procedure</span> <span class="kw">public</span>.handle_new_user();</span></code></pre></div>
 </section>
 <section id="remote-procedure-calls-rpc-are" class="slide level2">
 <h2>Remote Procedure Calls (RPC) are…</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">-- RPC</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">create</span> <span class="kw">or</span> <span class="kw">replace</span> <span class="kw">function</span> delete_user() returns void LANGUAGE SQL SECURITY <span class="kw">DEFINER</span> <span class="kw">AS</span> $$</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">delete</span> <span class="kw">from</span> <span class="kw">public</span>.userprofiles</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">where</span> <span class="kw">id</span> <span class="op">=</span> auth.<span class="fu">uid</span>();</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">delete</span> <span class="kw">from</span> auth.users</span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">where</span> <span class="kw">id</span> <span class="op">=</span> auth.<span class="fu">uid</span>();</span>
-<span id="cb5-7"><a href="#cb5-7"></a>$$;</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- RPC</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">create</span> <span class="kw">or</span> <span class="kw">replace</span> <span class="kw">function</span> delete_user() returns void LANGUAGE SQL SECURITY <span class="kw">DEFINER</span> <span class="kw">AS</span> $$</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">delete</span> <span class="kw">from</span> <span class="kw">public</span>.userprofiles</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span> <span class="kw">id</span> <span class="op">=</span> auth.<span class="fu">uid</span>();</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">delete</span> <span class="kw">from</span> auth.users</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span> <span class="kw">id</span> <span class="op">=</span> auth.<span class="fu">uid</span>();</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>$$;</span></code></pre></div>
 </section>
 <section id="how-to-run-this-vanilla-locally" class="slide level2">
 <h2>How to Run this (Vanilla Locally)?</h2>
@@ -199,23 +198,23 @@
 <li>Docker</li>
 <li>Docker Compose</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">npm</span> init -y</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">npm</span> i supabase -D</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="ex">npx</span> supabase init</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> init <span class="at">-y</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> i supabase <span class="at">-D</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> supabase init</span></code></pre></div>
 </section>
 <section id="how-to-run-next-iot-hub-locally" class="slide level2">
 <h2>How to Run Next IoT Hub (Locally)?</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">cd</span> next-iot-hub-api/dev-tools/local-supabase/docker</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="ex">docker</span> compose up</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> next-iot-hub-api/dev-tools/local-supabase/docker</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up</span></code></pre></div>
 </section>
 <section class="slide level2">
 
 <h3 id="the-credentials">The Credentials</h3>
 <p>are still the defaults</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="va">SUPABASE_ANON_KEY=</span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTYwMzk2ODgzNCwiZXhwIjoyNTUwNjUzNjM0LCJyb2xlIjoiYW5vbiJ9.36fUebxgx1mcBo4s19v0SzqmzunP--hm_hep0uLX0ew</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="va">SUPABASE_SERVICE_ROLE_KEY=</span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTYwMzk2ODgzNCwiZXhwIjoyNTUwNjUzNjM0LCJyb2xlIjoic2VydmljZV9yb2xlIn0.necIJaiP7X2T2QjGeV-FhpkizcNTX8HjDDBAxpgQTEI</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="va">JWT_SECRET=</span>super-secret-jwt-token-with-at-least-32-characters-long</span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="va">DATABASE_URL=</span>DATABASE_URL=<span class="st">&quot;postgresql://postgres:postgres@localhost:5432/postgres?schema=public&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="va">SUPABASE_ANON_KEY</span><span class="op">=</span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTYwMzk2ODgzNCwiZXhwIjoyNTUwNjUzNjM0LCJyb2xlIjoiYW5vbiJ9.36fUebxgx1mcBo4s19v0SzqmzunP--hm_hep0uLX0ew</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="va">SUPABASE_SERVICE_ROLE_KEY</span><span class="op">=</span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTYwMzk2ODgzNCwiZXhwIjoyNTUwNjUzNjM0LCJyb2xlIjoic2VydmljZV9yb2xlIn0.necIJaiP7X2T2QjGeV-FhpkizcNTX8HjDDBAxpgQTEI</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="va">JWT_SECRET</span><span class="op">=</span>super-secret-jwt-token-with-at-least-32-characters-long</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="va">DATABASE_URL</span><span class="op">=</span>DATABASE_URL=<span class="st">&quot;postgresql://postgres:postgres@localhost:5432/postgres?schema=public&quot;</span></span></code></pre></div>
 </section>
 <section id="how-to-run-next-iot-hub-in-production" class="slide level2">
 <h2>How to Run Next IoT Hub (in Production)?</h2>
@@ -233,9 +232,9 @@
 <section class="slide level2">
 
 <h3 id="setup-your-public-schema-using-prisma">Setup your public schema using Prisma</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="bu">cd</span> next-iot-hub-api/dev-tools/next-iot-hub-db/</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="ex">npm</span> ci</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="ex">npx</span> prisma db push --preview-feature --skip-generate</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> next-iot-hub-api/dev-tools/next-iot-hub-db/</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> ci</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> prisma db push <span class="at">--preview-feature</span> <span class="at">--skip-generate</span></span></code></pre></div>
 </section>
 <section class="slide level2">
 
@@ -251,21 +250,26 @@
     </div>
   </div>
 
-  <script src="https://unpkg.com/reveal.js/js/reveal.js"></script>
+  <script src="https://unpkg.com/reveal.js/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js/plugin/zoom/zoom.js"></script>
 
   <script>
 
       // Full list of configuration options available at:
-      // https://github.com/hakimel/reveal.js#configuration
+      // https://revealjs.com/config/
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
 
-        // Optional reveal.js plugins
-        dependencies: [
-          { src: 'https://unpkg.com/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-          { src: 'https://unpkg.com/reveal.js/plugin/zoom-js/zoom.js', async: true },
-          { src: 'https://unpkg.com/reveal.js/plugin/notes/notes.js', async: true }
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
         ]
       });
     </script>
