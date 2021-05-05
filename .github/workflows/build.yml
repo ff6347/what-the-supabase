@@ -18,7 +18,7 @@ jobs:
             -t revealjs
             --highlight-style=zenburn
             -s
-            -o dist/index.html
+            -o docs/index.html
             src/slides.md
             -V theme=night
             -V revealjs-url=https://unpkg.com/reveal.js
