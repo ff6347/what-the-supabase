@@ -15,13 +15,14 @@ jobs:
       - uses: docker://pandoc/core:2.13
         with:
           args: >- # allows you to break string into multiple lines
-            -t revealjs
+            --to=revealjs
             --highlight-style=zenburn
-            -s
-            -o docs/index.html
+            --template=src/default.revealjs
+            --standalone
+            --output=docs/index.html
             src/slides.md
-            -V theme=night
-            -V revealjs-url=https://unpkg.com/reveal.js
+            --variable theme=night
+            --variable revealjs-url=https://unpkg.com/reveal.js
       - uses: EndBug/add-and-commit@v7
         with:
           add: "docs"
