@@ -1,0 +1,29 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_via_pandoc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: checkout
+      - uses: docker://pandoc/core:2.9
+        with:
+          args: >- # allows you to break string into multiple lines
+            -t revealjs
+            --highlight-style=zenburn
+            -s
+            -o dist/index.html
+            src/slides.md
+            -V theme=night
+            -V revealjs-url=https://unpkg.com/reveal.js
+      - uses: EndBug/add-and-commit@v7
+        with:
+          add: "docs"
+          author_name: ff6347Bot
+          author_email: dev@ff6347.email
